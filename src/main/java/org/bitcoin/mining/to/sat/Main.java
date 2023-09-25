@@ -15,8 +15,9 @@ public class Main {
                 "0000",
                 0
         );
-//        final BlockHeader newBlock = miner.mine(genesisBlock);
-//        newBlock.printBlockHeader();
+        final BlockHeader newBlock = miner.mine(genesisBlock);
+        newBlock.printBlockHeader();
+
         miner.mineSAT(genesisBlock);
         System.out.println("End of program");
     }
