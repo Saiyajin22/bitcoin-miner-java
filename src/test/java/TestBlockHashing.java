@@ -3,12 +3,16 @@ import org.bitcoin.mining.to.sat.service.Miner;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.LinkedList;
+
 import static org.junit.Assert.*;
 
 public class TestBlockHashing {
 
     private BlockHeader difficulty4BlockHeader;
     private BlockHeader difficulty5BlockHeader;
+
+    private BlockHeader difficulty6BlockHeader;
     private Miner miner;
 
     @Before
@@ -33,6 +37,16 @@ public class TestBlockHashing {
                 2
         );
 
+        this.difficulty6BlockHeader = new BlockHeader(
+                1L,
+                "0x00FF",
+                "0x12FF",
+                "Block32",
+                23232L,
+                "000000",
+                2
+        );
+
         this.miner = new Miner();
     }
 
@@ -45,6 +59,12 @@ public class TestBlockHashing {
     @Test
     public void testMineWith5Difficulty() {
         final BlockHeader newBlockHeader = miner.mine(difficulty5BlockHeader);
+        assertNotNull(newBlockHeader);
+    }
+
+    @Test
+    public void testMineWith6Difficulty() {
+        final BlockHeader newBlockHeader = miner.mine(difficulty6BlockHeader);
         assertNotNull(newBlockHeader);
     }
 }
