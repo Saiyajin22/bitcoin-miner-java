@@ -42,9 +42,9 @@ public class Miner {
 
     public void mineSAT(final BlockHeader blockHeader) {
         final String targetDifficulty = blockHeader.getTargetDifficulty();
-        long nonce = 0;
+        long nonce;
         byte[] byteHash;
-        String newBlockHash = "";
+        String newBlockHash;
 
         while (true) {
             int flag = 0;
