@@ -24,3 +24,15 @@ hs_err_pid*
 replay_pid*
 
 .idea/
+.target/
+/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+/target/maven-archiver/pom.properties
+/target/surefire-reports/TEST-TestBlockHashing.xml
+/target/surefire-reports/TEST-TestBlockHeader.xml
+/target/surefire-reports/TEST-TestHashComparison.xml
+/target/surefire-reports/TestBlockHashing.txt
+/target/surefire-reports/TestBlockHeader.txt
+/target/surefire-reports/TestHashComparison.txt

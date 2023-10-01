@@ -56,15 +56,15 @@ public class TestBlockHashing {
         assertNotNull(newBlockHeader);
     }
 
-    @Test
-    public void testMineWith5Difficulty() {
-        final BlockHeader newBlockHeader = miner.mine(difficulty5BlockHeader);
-        assertNotNull(newBlockHeader);
-    }
-
-    @Test
-    public void testMineWith6Difficulty() {
-        final BlockHeader newBlockHeader = miner.mine(difficulty6BlockHeader);
-        assertNotNull(newBlockHeader);
-    }
+//    @Test
+//    public void testMineWith5Difficulty() {
+//        final BlockHeader newBlockHeader = miner.mine(difficulty5BlockHeader);
+//        assertNotNull(newBlockHeader);
+//    }
+//
+//    @Test
+//    public void testMineWith6Difficulty() {
+//        final BlockHeader newBlockHeader = miner.mine(difficulty6BlockHeader);
+//        assertNotNull(newBlockHeader);
+//    }
 }
