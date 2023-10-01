@@ -47,18 +47,22 @@ public class BlockUtil {
         return stringBuilder.toString();
     }
 
-    public static boolean compareHexadecimalStrings(String s1, String s2, String prefix) {
-        if(Objects.equals(prefix, "0x")) {
-            if(Long.parseLong(s1.substring(2), 16) < Long.parseLong(s2.substring(2), 16)) {
+    public static boolean compareHexadecimalStrings(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            throw new RuntimeException("The two strings must be the same length!");
+        }
+
+        for (int i = 0; i < s1.length(); i++) {
+            long firstNum = Long.parseLong(s1.substring(i, i+1), 16);
+            long secondNum = Long.parseLong(s2.substring(i, i+1), 16);
+            if(firstNum < secondNum) {
                 return true;
+            } else if(firstNum > secondNum) {
+                return false;
             }
         }
 
-        if(Long.parseLong(s1, 16) < Long.parseLong(s2, 16)) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     public static long byteArrayToLong(final byte[] bytes) {
