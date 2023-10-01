@@ -3,8 +3,6 @@ import org.bitcoin.mining.to.sat.service.Miner;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedList;
-
 import static org.junit.Assert.*;
 
 public class TestBlockHashing {
