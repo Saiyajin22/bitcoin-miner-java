@@ -17,7 +17,7 @@ public class Main {
                     0
             );
 
-            miner.mineSAT(genesisBlock, 2);
+            miner.mineSAT(genesisBlock, 2, 10000);
 //            miner.mineWithGivenNonce(genesisBlock, 4L);
             System.out.println("End of program");
         } catch (Exception e) {

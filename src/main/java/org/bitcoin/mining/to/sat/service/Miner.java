@@ -40,17 +40,18 @@ public class Miner {
         }
     }
 
-    public void mineSAT(final BlockHeader blockHeader, int numberOfLeadingZeros) {
+    public void mineSAT(final BlockHeader blockHeader, int numberOfLeadingZeros, int lastIteration) {
         final String targetDifficulty = blockHeader.getTargetDifficulty();
-        int counter = -1;
+        int counter = 0;
 
         while (true) {
             counter++;
-            if (counter == 10000) {
+            if (counter == lastIteration) {
                 break;
             }
             int flag = 0;
-            blockHeader.setNonce(new Random().nextLong());
+            long nonce = new Random().nextLong();
+            blockHeader.setNonce(nonce);
 
             try {
                 String sha256hex = DigestUtils.sha256Hex(DigestUtils.sha256Hex(blockHeader.toString()));
@@ -67,14 +68,6 @@ public class Miner {
                         flag = 1;
                     }
                     assert (flag == 1);
-
-//                    if (flag == 0) {
-//                        System.out.println(sha256hex);
-//                        System.out.println(blockHeader.getNonce());
-//                        System.out.println(counter);
-//                        blockHeader.setHash(sha256hex);
-//                        break;
-//                    }
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
