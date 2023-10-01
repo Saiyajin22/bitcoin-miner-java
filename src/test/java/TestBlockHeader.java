@@ -53,7 +53,7 @@ public class TestBlockHeader {
 
     @Test
     public void testBlockHashSHA256() {
-        final byte[] byteHash = BlockUtil.getByteHashSHA256(blockHeader1);
+        final byte[] byteHash = BlockUtil.sha256(blockHeader1.toString());
         final String hexadecimalStringHash = BlockUtil.getHexadecimalStringHash(byteHash);
         System.out.println(hexadecimalStringHash);
 

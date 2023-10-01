@@ -1,6 +1,6 @@
 package org.bitcoin.mining.to.sat.util;
 
-import org.bitcoin.mining.to.sat.model.BlockHeader;
+import lombok.NonNull;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -9,24 +9,34 @@ import java.util.Objects;
 
 public class BlockUtil {
 
-    public static byte[] getByteHashSHA256(final BlockHeader blockHeader) {
+    public static byte[] sha256(@NonNull final String valueToHash) {
         final MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-        return digest.digest(blockHeader.toString().getBytes(StandardCharsets.UTF_8));
+
+        try {
+            return digest.digest(valueToHash.getBytes(StandardCharsets.UTF_8));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static byte[] getByteHashSHA256FromBytes(final byte[] bytes) {
+    public static byte[] sha256(@NonNull final byte[] bytes) {
         final MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-        return digest.digest(bytes);
+
+        try {
+            return digest.digest(bytes);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static String getHexadecimalStringHash(final byte[] byteHash) {
