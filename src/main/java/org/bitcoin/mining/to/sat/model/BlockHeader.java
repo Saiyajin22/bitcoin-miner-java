@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BlockHeader {
+    //{Header: Hash+everything else }{Body: Prev.Hash, Nonce, MR, Timestamp}
     private long version;
     private String hash;
     private String previousHash;
@@ -16,6 +17,7 @@ public class BlockHeader {
     private String targetDifficulty;
     private long nonce;
 
+    // TODO Remove the hash from the toString method! Modify the structure based on Hamza's advices.
     @Override
     public String toString() {
         return version + hash + previousHash + merkleRoot + timeStamp + targetDifficulty + nonce;

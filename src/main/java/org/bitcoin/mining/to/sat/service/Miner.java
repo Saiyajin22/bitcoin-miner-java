@@ -47,7 +47,6 @@ public class Miner {
             if (counter == lastIteration) {
                 break;
             }
-            int flag = 0;
             long nonce = new Random().nextLong();
             blockHeader.setNonce(nonce);
 
@@ -58,14 +57,13 @@ public class Miner {
                 for (int i = 0; i < numberOfLeadingZeros; i++) {
                     if (sha256hex.charAt(i) != '0') {
                         isValidHash = false;
+                        break;
                     }
                 }
 
                 if (isValidHash) {
-                    if (!BlockUtil.compareHexadecimalStrings(sha256hex.substring(numberOfLeadingZeros), targetDifficulty.substring(numberOfLeadingZeros))) {
-                        assert (flag == 0);
-                    } else {
-                        assert (nonce == 0);
+                    if (BlockUtil.compareHexadecimalStrings(sha256hex.substring(numberOfLeadingZeros), targetDifficulty.substring(numberOfLeadingZeros))) {
+                        assert (false);
                         break;
                     }
                 }
