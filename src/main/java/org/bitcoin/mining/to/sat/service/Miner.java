@@ -5,7 +5,6 @@ import org.bitcoin.mining.to.sat.model.Block;
 import org.bitcoin.mining.to.sat.model.BlockHeader;
 import org.bitcoin.mining.to.sat.util.BlockUtil;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class Miner {
