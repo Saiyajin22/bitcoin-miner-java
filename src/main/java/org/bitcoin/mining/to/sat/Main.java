@@ -8,15 +8,17 @@ public class Main {
         final Miner miner = new Miner();
         final BlockHeader genesisBlock = new BlockHeader(
                 1L,
-                "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8c", // It's BTC's genesis block's hash
+                "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f", // It's BTC's genesis block's hash
                 null,
                 null,
                 1231006505,
-                "0000",
+                "004b6a2cba19d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8c1234",
                 0
         );
 
-        miner.mineSAT(genesisBlock);
+        miner.mineSAT(genesisBlock, 2, 10000);
+//            miner.mineWithGivenNonce(genesisBlock, 74240);
         System.out.println("End of program");
+
     }
 }

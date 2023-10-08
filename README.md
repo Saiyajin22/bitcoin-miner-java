@@ -1,2 +1,2 @@
 # bitcoin-miner-java
-Bitcoin miner implementation in Java
+SAT Based Bitcoin miner implementation in Java.
