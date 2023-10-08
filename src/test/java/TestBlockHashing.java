@@ -16,8 +16,7 @@ public class TestBlockHashing {
     @Before
     public void init() {
         this.difficulty4BlockHeader = new BlockHeader(
-                0L,
-                "0x000000000FFFFFF",
+                0,
                 "0x000000112FFFFFF",
                 "BlockHeader#2",
                 12453443L,
@@ -26,8 +25,7 @@ public class TestBlockHashing {
         );
 
         this.difficulty5BlockHeader = new BlockHeader(
-                1L,
-                "0x00FF",
+                1,
                 "0x12FF",
                 "Block32",
                 23232L,
@@ -36,8 +34,7 @@ public class TestBlockHashing {
         );
 
         this.difficulty6BlockHeader = new BlockHeader(
-                1L,
-                "0x00FF",
+                1,
                 "0x12FF",
                 "Block32",
                 23232L,
@@ -50,8 +47,8 @@ public class TestBlockHashing {
 
     @Test
     public void testMineWith4Difficulty() {
-        final BlockHeader newBlockHeader = miner.mine(difficulty4BlockHeader);
-        assertNotNull(newBlockHeader);
+        final String blockHash = miner.mine(difficulty4BlockHeader);
+        assertNotNull(blockHash);
     }
 
 //    @Test
