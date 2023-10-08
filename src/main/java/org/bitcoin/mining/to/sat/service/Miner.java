@@ -31,28 +31,8 @@ public class Miner {
         }
     }
 
-    public String convertBitsToTarget(final String bits) {
-        if (Objects.isNull(bits) || bits.length() != 8) {
-            throw new RuntimeException("The bits should be a 8 character long string");
-        }
-        final StringBuilder target = new StringBuilder();
-        final String exponent = bits.substring(0, 2);
-        final String coefficient = bits.substring(2, 8);
-        long exponentAsDecimal = Long.parseLong(exponent, 16);
-
-        for (int i = 0; i < 64 - (exponentAsDecimal * 2); i++) {
-            target.append("0");
-        }
-        target.append(coefficient);
-        for (int i = 0; i < exponentAsDecimal * 2 - 6; i++) {
-            target.append("0");
-        }
-
-        return target.toString();
-    }
-
     public void mineSAT(final Block block, int numberOfLeadingZeros, int lastIteration) {
-        final String targetDifficulty = convertBitsToTarget(block.getHeader().getBits());
+        final String targetDifficulty = BlockUtil.convertBitsToTarget(block.getHeader().getBits());
         int counter = 0;
 
         while (true) {
