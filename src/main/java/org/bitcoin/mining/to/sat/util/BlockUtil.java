@@ -8,6 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public class BlockUtil {
+    public static final long MAXIMUM_NONCE = 4294967295L;
 
     public static byte[] sha256(@NonNull final String valueToHash) {
         final MessageDigest digest;
