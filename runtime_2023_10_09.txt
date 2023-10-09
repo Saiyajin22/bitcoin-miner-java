@@ -1,0 +1,2 @@
+Random mining takes time up to: 6653675ms ~ approximately 110 minutes
+Incremental mining takes time up to: 192473ms ~ approximately 3.2 minutes

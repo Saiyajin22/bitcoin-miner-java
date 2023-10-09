@@ -15,7 +15,7 @@ public class TestBlockHashing {
 
     @Test
     public void testMineWith4Difficulty() {
-        final String blockHash = miner.mineRandom(TestData.getBlock100500Th());
+        final String blockHash = miner.mineRandom(TestData.getBlock100500ThExample());
         assertNotNull(blockHash);
     }
 }
