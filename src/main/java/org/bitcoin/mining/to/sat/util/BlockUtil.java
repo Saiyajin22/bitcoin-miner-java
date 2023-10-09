@@ -115,4 +115,14 @@ public class BlockUtil {
 
         return target.toString();
     }
+
+    public static long getNumberOfLeadingZeros(final String bits) {
+        if (Objects.isNull(bits) || bits.length() != 8) {
+            throw new RuntimeException("The bits should be a 8 character long string");
+        }
+        final String exponent = bits.substring(0, 2);
+        long exponentAsDecimal = Long.parseLong(exponent, 16);
+
+        return 64 - (exponentAsDecimal * 2);
+    }
 }

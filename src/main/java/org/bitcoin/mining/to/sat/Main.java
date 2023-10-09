@@ -25,7 +25,7 @@ public class Main {
                 new ArrayList<>()
         );
 
-        miner.mineSAT(block, 2, 10000);
+        miner.mineSAT(block);
         System.out.println("End of program");
 
     }
