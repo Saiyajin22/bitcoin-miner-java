@@ -49,7 +49,7 @@ public class BlockUtil {
     }
 
     public static boolean compareHexadecimalStrings(String s1, String s2) {
-        if (s1.length() != s2.length()) {
+        if (s1 != null && s2 != null && s1.length() != s2.length()) {
             throw new RuntimeException("The two strings must be the same length!");
         }
 
