@@ -1,5 +1,5 @@
+import org.apache.commons.codec.digest.DigestUtils;
 import org.bitcoin.mining.to.sat.model.BlockHeader;
-import org.bitcoin.mining.to.sat.util.BlockUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,39 +13,36 @@ public class TestBlockHeader {
     @Before
     public void init() {
         this.blockHeader1 = new BlockHeader(
-                0L,
+                0,
                 "0x000000000FFFFFF",
                 "0x000000112FFFFFF",
-                "BlockHeader#2",
                 12453443L,
                 "0x00F",
                 0L
         );
 
         this.blockHeader2 = new BlockHeader(
-                1L,
+                1,
                 "0x00FF",
                 "0x12FF",
-                "Block32",
                 23232L,
                 "0x00F",
-                2
+                2L
         );
     }
 
     @Test
     public void testBlockCreation() {
-        assertEquals(blockHeader1.getHash(), "0x000000000FFFFFF");
+        assertEquals(blockHeader1.getBits(), "0x00F");
     }
 
     @Test
     public void testBlockStringRepresentation() {
         final String expectedResult = blockHeader2.getVersion() +
-                blockHeader2.getHash() +
-                blockHeader2.getPreviousHash() +
+                blockHeader2.getPrevBlockHash() +
                 blockHeader2.getMerkleRoot() +
                 blockHeader2.getTimeStamp() +
-                blockHeader2.getTargetDifficulty() +
+                blockHeader2.getBits() +
                 blockHeader2.getNonce();
 
         assertEquals(blockHeader2.toString(), expectedResult);
@@ -53,11 +50,9 @@ public class TestBlockHeader {
 
     @Test
     public void testBlockHashSHA256() {
-        final byte[] byteHash = BlockUtil.sha256(blockHeader1.toString());
-        final String hexadecimalStringHash = BlockUtil.getHexadecimalStringHash(byteHash);
-        System.out.println(hexadecimalStringHash);
+        final String hash = DigestUtils.sha256Hex(blockHeader1.toString());
 
-        assertNotNull(hexadecimalStringHash);
-        assertEquals(hexadecimalStringHash.length(), 64);
+        assertNotNull(hash);
+        assertEquals(hash.length(), 64);
     }
 }

@@ -8,28 +8,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BlockHeader {
-    //{Header: Hash+everything else }{Body: Prev.Hash, Nonce, MR, Timestamp}
-    private long version;
-    private String hash;
-    private String previousHash;
+    private int version;
+    private String prevBlockHash;
     private String merkleRoot;
     private long timeStamp;
-    private String targetDifficulty;
+    private String bits; // Simplified representation of the target difficulty
     private long nonce;
 
-    // TODO Remove the hash from the toString method! Modify the structure based on Hamza's advices.
     @Override
     public String toString() {
-        return version + hash + previousHash + merkleRoot + timeStamp + targetDifficulty + nonce;
+        return version + prevBlockHash + merkleRoot + timeStamp + bits + nonce;
     }
 
     public void printBlockHeader() {
         System.out.println("Version: " + version);
-        System.out.println("Hash: " + hash);
-        System.out.println("Prev hash: " + previousHash);
+        System.out.println("Prev hash: " + prevBlockHash);
         System.out.println("Merkleroot: " + merkleRoot);
         System.out.println("Timestamp: " + timeStamp);
-        System.out.println("Target difficulty: " + targetDifficulty);
+        System.out.println("Target difficulty: " + bits);
         System.out.println("Nonce: " + nonce);
     }
 

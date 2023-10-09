@@ -1,45 +1,68 @@
 package org.bitcoin.mining.to.sat.service;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.bitcoin.mining.to.sat.model.BlockHeader;
+import org.bitcoin.mining.to.sat.model.Block;
 import org.bitcoin.mining.to.sat.util.BlockUtil;
 
-import java.sql.Timestamp;
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class Miner {
 
-    public BlockHeader mine(final BlockHeader blockHeader) {
-        final String targetDifficulty = blockHeader.getTargetDifficulty();
-        long nonce;
+    public String mineRandom(final Block block) {
+        final String targetDifficulty = BlockUtil.convertBitsToTarget(block.getHeader().getBits());
+        long step = 0;
+        long nonce = 0;
 
-        while (true) {
-            nonce = new Random().nextLong();
-            blockHeader.setNonce(nonce);
+        while (step <= BlockUtil.MAXIMUM_NONCE) {
+            if(step != 0) {
+                nonce = new SecureRandom().nextLong() % (BlockUtil.MAXIMUM_NONCE + 1);
+            }
+            block.getHeader().setNonce(nonce);
+            final String hash = DigestUtils.sha256Hex(DigestUtils.sha256Hex(block.getHeader().toString()));
+            if (BlockUtil.compareHexadecimalStrings(hash, targetDifficulty)) {
+                return hash;
+            }
+            step++;
 
-            final byte[] byteHash = BlockUtil.sha256(BlockUtil.sha256(blockHeader.toString()));
-            final String newBlockHash = BlockUtil.getHexadecimalStringHash(byteHash);
-
-            if (newBlockHash.startsWith(targetDifficulty)) {
-                System.out.println("BlockHeader mined!");
-                System.out.println("Valid Nonce: " + nonce);
-                System.out.println("New BlockHeader Hash: " + newBlockHash);
-
-                return new BlockHeader(
-                        blockHeader.getVersion(),
-                        newBlockHash,
-                        blockHeader.getPreviousHash(),
-                        blockHeader.getMerkleRoot(),
-                        new Timestamp(System.currentTimeMillis()).getTime(),
-                        blockHeader.getTargetDifficulty(),
-                        nonce
-                );
+            // If no nonce was good, repeat the process with changed timestamp
+            if (step > BlockUtil.MAXIMUM_NONCE) {
+                block.getHeader().setTimeStamp(System.currentTimeMillis());
+                nonce = 0;
+                step = 0;
             }
         }
+
+        return null;
     }
 
-    public void mineSAT(final BlockHeader blockHeader, int numberOfLeadingZeros, int lastIteration) {
-        final String targetDifficulty = blockHeader.getTargetDifficulty();
+    public String mineIncrement(final Block block) {
+        final String targetDifficulty = BlockUtil.convertBitsToTarget(block.getHeader().getBits());
+        long step = 0;
+        long nonce = -1;
+
+        while (step <= BlockUtil.MAXIMUM_NONCE) {
+            nonce++;
+            block.getHeader().setNonce(nonce);
+            final String hash = DigestUtils.sha256Hex(DigestUtils.sha256Hex(block.getHeader().toString()));
+            if (BlockUtil.compareHexadecimalStrings(hash, targetDifficulty)) {
+                return hash;
+            }
+            step++;
+
+            // If no nonce was good, repeat the process with changed timestamp
+            if (step > BlockUtil.MAXIMUM_NONCE) {
+                block.getHeader().setTimeStamp(System.currentTimeMillis());
+                nonce = -1;
+                step = 0;
+            }
+        }
+
+        return null;
+    }
+
+    public void mineSAT(final Block block, int numberOfLeadingZeros, int lastIteration) {
+        final String targetDifficulty = BlockUtil.convertBitsToTarget(block.getHeader().getBits());
         int counter = 0;
 
         while (true) {
@@ -48,10 +71,10 @@ public class Miner {
                 break;
             }
             long nonce = new Random().nextLong();
-            blockHeader.setNonce(nonce);
+            block.getHeader().setNonce(nonce);
 
             try {
-                String sha256hex = DigestUtils.sha256Hex(DigestUtils.sha256Hex(blockHeader.toString()));
+                String sha256hex = DigestUtils.sha256Hex(DigestUtils.sha256Hex(block.getHeader().toString()));
                 boolean isValidHash = true;
                 // Check leading zeros
                 for (int i = 0; i < numberOfLeadingZeros; i++) {
@@ -73,20 +96,10 @@ public class Miner {
         }
     }
 
-    public void mineWithGivenNonce(final BlockHeader blockHeader, final long nonce) {
-        blockHeader.setNonce(nonce);
-        String sha256hex = DigestUtils.sha256Hex(DigestUtils.sha256Hex(blockHeader.toString()));
+    public void mineWithGivenNonce(final Block block, final long nonce) {
+        block.getHeader().setNonce(nonce);
+        String sha256hex = DigestUtils.sha256Hex(DigestUtils.sha256Hex(block.getHeader().toString()));
 
-        BlockHeader blockHeader1 = new BlockHeader(
-                blockHeader.getVersion(),
-                sha256hex,
-                blockHeader.getPreviousHash(),
-                blockHeader.getMerkleRoot(),
-                new Timestamp(System.currentTimeMillis()).getTime(),
-                blockHeader.getTargetDifficulty(),
-                nonce
-        );
-
-        blockHeader1.printBlockHeader();
+        System.out.println("Found new valid hash: " + sha256hex + ", with nonce: " + nonce);
     }
 }
