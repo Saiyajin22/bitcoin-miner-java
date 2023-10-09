@@ -19,13 +19,13 @@ public class TestMining {
         miner.mineRandom(TestData.getBlock100500ThExample());
         long endTime = System.currentTimeMillis();
 
-        System.out.println("Random mining takes time up to: " + (endTime-startTime));
+        System.out.println("Random mining takes time up to: " + (endTime - startTime));
 
         startTime = System.currentTimeMillis();
         miner.mineIncrement(TestData.getBlock100500ThExample());
         endTime = System.currentTimeMillis();
 
-        System.out.println("Incremental mining takes time up to: " + (endTime-startTime));
+        System.out.println("Incremental mining takes time up to: " + (endTime - startTime));
     }
 
     // The target is lower than the actual one
@@ -35,13 +35,13 @@ public class TestMining {
         miner.mineRandom(TestData.getBlock670500ThExample());
         long endTime = System.currentTimeMillis();
 
-        System.out.println("Random mining takes time up to: " + (endTime-startTime));
+        System.out.println("Random mining takes time up to: " + (endTime - startTime));
 
         startTime = System.currentTimeMillis();
         miner.mineIncrement(TestData.getBlock670500ThExample());
         endTime = System.currentTimeMillis();
 
-        System.out.println("Incremental mining takes time up to: " + (endTime-startTime));
+        System.out.println("Incremental mining takes time up to: " + (endTime - startTime));
     }
 
     // The target is lower than the actual one
@@ -55,12 +55,21 @@ public class TestMining {
         miner.mineRandom(TestData.getBlock670500ThExample2());
         long endTime = System.currentTimeMillis();
 
-        System.out.println("Random mining takes time up to: " + (endTime-startTime));
+        System.out.println("Random mining takes time up to: " + (endTime - startTime));
 
         startTime = System.currentTimeMillis();
         miner.mineIncrement(TestData.getBlock670500ThExample2());
         endTime = System.currentTimeMillis();
 
-        System.out.println("Incremental mining takes time up to: " + (endTime-startTime));
+        System.out.println("Incremental mining takes time up to: " + (endTime - startTime));
+    }
+
+    @Test
+    public void testMineSAT() {
+        long startTime = System.currentTimeMillis();
+        miner.mineSAT(TestData.getBlock670500ThExample());
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("SAT Based mining takes time up to: " + (endTime - startTime));
     }
 }
