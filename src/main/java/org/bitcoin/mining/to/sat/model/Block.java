@@ -15,4 +15,8 @@ public class Block {
     private BlockHeader header; // 80 Byte field containing six individual components
     private int txCount;
     private List<Transaction> transactions;
+
+    public Block(int size) {
+        this.size = size;
+    }
 }

@@ -5,17 +5,16 @@ import org.bitcoin.mining.to.sat.model.Block;
 import org.bitcoin.mining.to.sat.util.BlockUtil;
 
 import java.security.SecureRandom;
-import java.util.Random;
 
 public class Miner {
 
-    public String mineRandom(final Block block) {
+    public static String mineRandom(final Block block) {
         final String targetDifficulty = BlockUtil.convertBitsToTarget(block.getHeader().getBits());
         long step = 0;
         long nonce = 0;
 
         while (step <= BlockUtil.MAXIMUM_NONCE) {
-            if(step != 0) {
+            if (step != 0) {
                 nonce = new SecureRandom().nextLong() % (BlockUtil.MAXIMUM_NONCE + 1);
             }
             block.getHeader().setNonce(nonce);
@@ -36,7 +35,7 @@ public class Miner {
         return null;
     }
 
-    public String mineIncrement(final Block block) {
+    public static String mineIncrement(final Block block) {
         final String targetDifficulty = BlockUtil.convertBitsToTarget(block.getHeader().getBits());
         long nonce = -1;
 
@@ -59,7 +58,7 @@ public class Miner {
         return null;
     }
 
-    public void mineSAT(final Block block) {
+    public static void mineSAT(final Block block) {
         final String targetDifficulty = BlockUtil.convertBitsToTarget(block.getHeader().getBits());
         final long numberOfLeadingZeros = BlockUtil.getNumberOfLeadingZeros(block.getHeader().getBits());
         long nonce = -1;
@@ -98,7 +97,7 @@ public class Miner {
         }
     }
 
-    public void mineWithGivenNonce(final Block block, final long nonce) {
+    public static void mineWithGivenNonce(final Block block, final long nonce) {
         block.getHeader().setNonce(nonce);
         String sha256hex = DigestUtils.sha256Hex(DigestUtils.sha256Hex(block.getHeader().toString()));
 
