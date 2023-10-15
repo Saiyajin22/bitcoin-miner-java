@@ -64,27 +64,27 @@ public class Miner {
         long nonce = -1;
 
         while (nonce <= BlockUtil.MAXIMUM_NONCE) {
+            int flag = 0;
             nonce++;
             block.getHeader().setNonce(nonce);
 
             try {
                 final String sha256hex = DigestUtils.sha256Hex(DigestUtils.sha256Hex(block.getHeader().toString()));
-                boolean isValidHash = true;
+                boolean sufficientZeros = true;
                 // Check leading zeros
                 for (int i = 0; i < numberOfLeadingZeros; i++) {
                     if (sha256hex.charAt(i) != '0') {
-                        isValidHash = false;
+                        sufficientZeros = false;
                         break;
                     }
                 }
 
                 // Here we check if the hash is valid
-                if (isValidHash) {
-                    if (BlockUtil.compareHexadecimalStrings(sha256hex.substring((int) numberOfLeadingZeros), targetDifficulty.substring((int) numberOfLeadingZeros))) {
-                        assert (false);
-                        break;
-                    }
+                if (sufficientZeros && BlockUtil.compareHexadecimalStrings(sha256hex.substring((int) numberOfLeadingZeros), targetDifficulty.substring((int) numberOfLeadingZeros))) {
+                    flag = 1;
                 }
+
+                assert (flag == 0);
 
                 // If no nonce was good, repeat the process with changed timestamp
                 if (nonce > BlockUtil.MAXIMUM_NONCE) {
@@ -101,6 +101,6 @@ public class Miner {
         block.getHeader().setNonce(nonce);
         String sha256hex = DigestUtils.sha256Hex(DigestUtils.sha256Hex(block.getHeader().toString()));
 
-        System.out.println("Found new valid hash: " + sha256hex + ", with nonce: " + nonce);
+        System.out.println("Found new hash: " + sha256hex + ", with nonce: " + nonce);
     }
 }
