@@ -49,7 +49,7 @@ public class BlockUtil {
     }
 
     public static boolean compareHexadecimalStrings(String s1, String s2) {
-        if (s1.length() != s2.length()) {
+        if (s1 != null && s2 != null && s1.length() != s2.length()) {
             throw new RuntimeException("The two strings must be the same length!");
         }
 
@@ -114,5 +114,15 @@ public class BlockUtil {
         }
 
         return target.toString();
+    }
+
+    public static long getNumberOfLeadingZeros(final String bits) {
+        if (Objects.isNull(bits) || bits.length() != 8) {
+            throw new RuntimeException("The bits should be a 8 character long string");
+        }
+        final String exponent = bits.substring(0, 2);
+        long exponentAsDecimal = Long.parseLong(exponent, 16);
+
+        return 64 - (exponentAsDecimal * 2);
     }
 }

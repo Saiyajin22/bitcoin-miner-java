@@ -1,2 +1,10 @@
+Runtime for 670500Th block with 6 zeros
 Random mining takes time up to: 6653675ms ~ approximately 110 minutes
 Incremental mining takes time up to: 192473ms ~ approximately 3.2 minutes
+
+Runtimes for 670500Th block with 4 zeros
+Random mining takes time up to: 2312 ms
+Incremental mining takes time up to: 31 ms
+
+MineSAT runtime for 670500Th block with 4 zeros
+213 ms
