@@ -6,6 +6,5 @@ import org.bitcoin.mining.to.sat.service.Miner;
 public class Main {
     public static void main(String[] args) {
         Miner.mineSAT(BlockData.getBlock100500ThExample());
-        System.out.println("End of program");
     }
 }

@@ -79,8 +79,12 @@ public class Miner {
                     }
                 }
 
+                if(!sufficientZeros) {
+                    continue;
+                }
+
                 // Here we check if the hash is valid
-                if (sufficientZeros && BlockUtil.compareHexadecimalStrings(sha256hex.substring((int) numberOfLeadingZeros), targetDifficulty.substring((int) numberOfLeadingZeros))) {
+                if (BlockUtil.compareHexadecimalStrings(sha256hex.substring((int) numberOfLeadingZeros), targetDifficulty.substring((int) numberOfLeadingZeros))) {
                     flag = 1;
                 }
 
