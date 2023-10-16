@@ -105,13 +105,13 @@ public class BlockUtil {
         final String coefficient = bits.substring(2, 8);
         long exponentAsDecimal = Long.parseLong(exponent, 16);
 
-        for (int i = 0; i < 64 - (exponentAsDecimal * 2); i++) {
-            target.append("0");
-        }
-        target.append(coefficient);
-        for (int i = 0; i < exponentAsDecimal * 2 - 6; i++) {
-            target.append("0");
-        }
+//        for (int i = 0; i < 64 - (exponentAsDecimal * 2); i++) {
+//            target.append("0");
+//        }
+//        target.append(coefficient);
+//        for (int i = 0; i < exponentAsDecimal * 2 - 6; i++) {
+//            target.append("0");
+//        }
 
         return target.toString();
     }
